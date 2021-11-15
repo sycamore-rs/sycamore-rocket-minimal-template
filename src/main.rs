@@ -9,7 +9,7 @@ async fn index() -> io::Result<response::content::Html<String>> {
         .expect("index.html should be valid utf-8");
 
     let rendered = sycamore::render_to_string(|| {
-        template! {
+        view! {
             app::App()
         }
     });

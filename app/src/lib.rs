@@ -3,7 +3,7 @@ use wasm_bindgen::JsCast;
 use web_sys::{Event, HtmlInputElement};
 
 #[component(App<G>)]
-pub fn app() -> Template<G> {
+pub fn app() -> View<G> {
     let name = Signal::new(String::new());
 
     let displayed_name = cloned!((name) => move || {
@@ -25,7 +25,7 @@ pub fn app() -> Template<G> {
         );
     };
 
-    template! {
+    view! {
         div {
             h1 {
                 "Hello "
