@@ -1,18 +1,19 @@
+#![allow(non_snake_case)]
 use sycamore::prelude::*;
 use wasm_bindgen::JsCast;
 use web_sys::{Event, HtmlInputElement};
 
-#[component(App<G>)]
-pub fn app() -> View<G> {
-    let name = Signal::new(String::new());
+#[component]
+pub fn App<G: Html>(cx: Scope) -> View<G> {
+    let name = create_signal(cx, String::new());
 
-    let displayed_name = cloned!((name) => move || {
+    let displayed_name = move || {
         if name.get().is_empty() {
             "World".to_string()
         } else {
             name.get().as_ref().clone()
         }
-    });
+    };
 
     let handle_change = move |event: Event| {
         name.set(
@@ -25,7 +26,7 @@ pub fn app() -> View<G> {
         );
     };
 
-    view! {
+    view! { cx,
         div {
             h1 {
                 "Hello "
